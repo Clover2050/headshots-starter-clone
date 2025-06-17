@@ -1,273 +1,699 @@
-# 👨‍💼 [Headshot AI](https://headshots-starter.vercel.app/) - Professional Headshots with AI (powered by Astria.ai)
-
-Introducing Headshot AI, an open-source project from [Astria](https://www.astria.ai/) that generates Professional AI Headshots in minutes.
-
-This project was built to give developers & makers a great starting point into building AI applications. This is your launch pad - fork the code, modify it, and make it your own to build a popular AI SaaS app.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain&env=ASTRIA_API_KEY,APP_WEBHOOK_SECRET&envDescription=Set%20up%20environment%20variables%20for%20Leap%20AI%20and%20redirect%20URL%20in%20Supabase%20Auth%20dashboard.%20See%20.env.local.example%20for%20full%20config%20with%20Resend%20and%20Stripe.&envLink=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Fblob%2Fmain%2F.env.local.example&project-name=headshots-starter-clone&repository-name=headshots-starter-clone&demo-title=AI%20Headshot%20Generator&demo-description=A%20Professional%20AI%20headshot%20generator%20starter%20kit%20powered%20by%20Next.js%2C%20Leap%20AI%2C%20and%20Vercel&demo-url=https%3A%2F%2Fwww.getheadshots.ai%2F&demo-image=https%3A%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F1CEDfTwO5vPEiNMgN2Y1t6%2F245d1e0c11c4d8e734fbe345b9ecdc7c%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain)
-
-[![Headshot AI Demo](/public/new-demo.png)](https://headshots-starter.vercel.app/)
-
-## Incoming changes
-
-Incoming [PR]((https://github.com/astriaai/headshots-starter/pull/121)) has been merged to allow usage of  Astria's packs API which helps you avoid hardcoding prompts in your code as well as offering different packs of prompts, and switching to the new Flux model fine-tuning easily.
-Read more on advantage of using packs [Astria's documentation](https://docs.astria.ai/docs/api/pack/pack//).
-
-When migrating to the new packs api, add to your vercel environment:
-```text
-NEXT_PUBLIC_TUNE_TYPE=packs
-PACK_QUERY_TYPE=both
-```
-
-![Headshot AI Packs](assets/headshots-packs.png)
-Here is how it looks
-
-## Important Environment Variable Change
-
-**Note:** The environment variable `VERCEL_URL` has been renamed to `DEPLOYMENT_URL` for consistency across the codebase. If you're updating from a previous version, please update your environment variables accordingly. This change makes the application more platform-agnostic and clearer for deployments on any hosting provider, not just Vercel.
-
-## How It Works
-
-Live demo **[here](https://getheadshots.ai)**.
-
-The app is powered by:
-
-- 🚀 [Astria](https://www.astria.ai/) for AI model training & inference
-- ▲ [Next.js](https://nextjs.org/) for app and landing page
-- 🔋 [Supabase](https://supabase.com/) for DB & Auth
-- 📩 [Resend](https://resend.com/) (optional) to email user when headshots are ready
-- ⭐️ [Shadcn](https://ui.shadcn.com/) with [Tailwind CSS](https://tailwindcss.com/) for styles
-- ▲ [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain&env=ASTRIA_API_KEY,APP_WEBHOOK_SECRET&envDescription=Set%20up%20environment%20variables%20for%20Leap%20AI%20and%20redirect%20URL%20in%20Supabase%20Auth%20dashboard.%20See%20.env.local.example%20for%20full%20config%20with%20Resend%20and%20Stripe.&envLink=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Fblob%2Fmain%2F.env.local.example&project-name=headshots-starter-clone&repository-name=headshots-starter-clone&demo-title=AI%20Headshot%20Generator&demo-description=A%20Professional%20AI%20headshot%20generator%20starter%20kit%20powered%20by%20Next.js%2C%20Leap%20AI%2C%20and%20Vercel&demo-url=https%3A%2F%2Fwww.getheadshots.ai%2F&demo-image=https%3A%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F1CEDfTwO5vPEiNMgN2Y1t6%2F245d1e0c11c4d8e734fbe345b9ecdc7c%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain) for deployments
-- 💳 [Stripe](https://stripe.com/) for billing
-
-[![Headshot AI Explainer](/public/new-explainer.png)](https://www.astria.ai/)
-
-## Running Locally
-
-To create your own Headshot AI app, follow these steps:
-
-**Note**
-Training models is only available on paid plans. You'll need an active [Astria API Key](<[url](https://www.astria.ai/pricing)>) to train models.
-
-### 1. Vercel template
-
-To setup Supabase/Vercel and your github repo, click on the Vercel Deploy Button and follow the steps.
-
-IMPORTANT: In the Supabase integration step: Make sure you leave the Create sample tables option checked. This might take a few minutes to complete.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain&env=ASTRIA_API_KEY,APP_WEBHOOK_SECRET&envDescription=Set%20up%20environment%20variables%20for%20Leap%20AI%20and%20redirect%20URL%20in%20Supabase%20Auth%20dashboard.%20See%20.env.local.example%20for%20full%20config%20with%20Resend%20and%20Stripe.&envLink=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Fblob%2Fmain%2F.env.local.example&project-name=headshots-starter-clone&repository-name=headshots-starter-clone&demo-title=AI%20Headshot%20Generator&demo-description=A%20Professional%20AI%20headshot%20generator%20starter%20kit%20powered%20by%20Next.js%2C%20Leap%20AI%2C%20and%20Vercel&demo-url=https%3A%2F%2Fwww.getheadshots.ai%2F&demo-image=https%3A%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F1CEDfTwO5vPEiNMgN2Y1t6%2F245d1e0c11c4d8e734fbe345b9ecdc7c%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain)
-
-The Vercel Deployment will create a new repository with this template on your GitHub account and guide you through a new Supabase project creation. The Supabase Vercel Deploy Integration will set up the necessary Supabase environment variables and run the SQL migrations to set up the Database schema on your account. You can inspect the created tables in your project's Table editor.
-
-This will create the tables with their respective columns and RLS policies:
-
-- credits
-- images
-- models
-- samples
-
-### 2. Clone your newly created repo:
-
-```
-git clone {{your-repo-name}}
-```
-
-### 3. Enter your newly created repo's directory:
-
-```
-cd {{your-repo-name}}
-```
-
-### 4. Install dependencies:
-
-For npm:
-
-```bash
-npm install
-```
-
-For yarn:
-
-```bash
-yarn
-```
-
-### 5. Magic Link Auth (Supabase)
-
-In your supabase [dashboard](https://supabase.com/dashboard/), select newly created project, go to Authentication -> Email Templates -> Magic Link and paste the following template:
-
-```
-<h2>Magic Link</h2>
-<p>Follow this link to login:</p>
-<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email">Log In</a></p>
-```
-
-Then, make sure to setup your site URL and redirect urls in the supabase dashboard under Authentication -> URL Configuration.
-
-For example:
-
-Site URL: https://headshots-starter.vercel.app
-
-Redirect URL: https://headshots-starter.vercel.app/**
-
-### 6. Create a [Astria](https://www.astria.ai/) account
-
-In your `.env.local` file:
-
-- Fill in `your_api_key` with your [Astria API key](https://www.astria.ai/users/edit#api)
-- Fill in `your-webhook-secret` with any arbitrary URL friendly string eg.`shadf892yr398hq23h`
-- Fill in `your-deployment-url` with a url to catch webhooks from Astria. This will be your vercel deployment url or Ngrok tunnel locally (eg. https://{your-hosted-url}/astria/train-webhook)
-- Fill in `your-blob-read-write-token` with your Vercel Blob token (steps below)
-
-If your production webhook callbacks do not seem to be working, make sure the callback URL is not of a Vercel dedicated branch deployment which requires authentication, in which case you will not see the callback in the logs.
-### 7. Configure the Announcement Bar (Optional)
-
-To enable and customize the announcement bar at the top of your site, configure these environment variables in your `.env.local`:
-
-```text
-# Announcement Bar Configuration
-NEXT_PUBLIC_ANNOUNCEMENT_ENABLED=true # set to false to disable the announcement bar
-NEXT_PUBLIC_ANNOUNCEMENT_MESSAGE="Your announcement message here" # the message to display
-```
-
-
-### 8. Configure [Vercel Blob](https://vercel.com/docs/storage/vercel-blob/quickstart#client-uploads) for image uploads
-
-In your Vercel project, create a [Blob store](https://vercel.com/docs/storage/vercel-blob/quickstart#create-a-blob-store)
-
-- In your Vercel dashboard, select the Storage tab, then select the Connect Database button.
-- Under the Create New tab, select Blob and then the Continue button.
-
-Then to configure in your .env:
-
-- In your Vercel dashboard, select the Settings tab, then select the Environment Variables tab.
-- Copy your `BLOB_READ_WRITE_TOKEN` to your .env
-
-### 9. Create a [Resend](https://resend.com/) account (Optional)
-
-- Fill in `your-resend-api-key` with your Resend API Key if you wish to use Resend to email users when their model has finished training.
-
-### 10. Configure [Stripe](https://stripe.com) to bill users on a credit basis. (Optional)
-
-The current setup is for a credit based system. 1 credit = 1 model train.
-
-To enable Stripe billing, you will need to fill out the following fields in your `.env.local` file:
-
-- STRIPE_SECRET_KEY=your-stripe-secret-key
-- STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
-- STRIPE_PRICE_ID_ONE_CREDIT=your-stripe-price-id-one-credit
-- STRIPE_PRICE_ID_THREE_CREDITS=your-stripe-price-id-three-credit
-- STRIPE_PRICE_ID_FIVE_CREDITS=your-stripe-price-id-five-credit
-- NEXT_PUBLIC_STRIPE_IS_ENABLED=false # set to true to enable Stripe payments
-
-You need to do multiple things to get Stripe working:
-
-- Get your Stripe API secret key from the [Stripe Dashboard](https://dashboard.stripe.com/test/apikeys)
-- Create a [Stripe Webhook](https://dashboard.stripe.com/test/webhooks) that will point to your hosted URL. The webhook should be listening for the `checkout.session.completed` event. The webhook should point to `your-hosted-url/stripe/subscription-webhook`.
-- Create a [Stripe Price](https://dashboard.stripe.com/test/products) for each credit package you want to offer.
-- Create a [Stripe Pricing Table](https://dashboard.stripe.com/test/pricing-tables) and replace the script @/components/stripe/StripeTable.tsx with your own values. It should look like this:
-
-```js
-<stripe-pricing-table
-  pricing-table-id="your-stripe-pricing-table-id"
-  publishable-key="your-stripe-publishable-key"
-  client-reference-id={user.id}
-  customer-email={user.email}
-></stripe-pricing-table>
-```
-
-Here are the products you need to create to get Stripe working with our example, checkout the images [Here](/public/Stripe/)
-
-To create them go on the Stripe dashboard, search for Product Catalog and then click on the add product button on the top right of the screen. You will need to create 3 products, one for each credit package as shown in the images before. We set them to One time payments, but you can change that if you want to and you can set the price too. After creating the products make sure to update the variables in the .env.local [your-stripe-price-id-one-credit, your-stripe-price-id-three-credit, your-stripe-price-id-five-credit] with their respective price ids, each price id is found in the product page at the bottom.
-
-### 11. Start the development server:
-
-For npm:
-
-```bash
-npm run dev
-```
-
-For yarn:
-
-```bash
-yarn dev
-```
-
-### 12. Visit `http://localhost:3000` in your browser to see the running app.
-
-## One-Click Deploy
-
-Default deploy using Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fastria-ai%2Fheadshots-starter%2Ftree%2Fmain&env=ASTRIA_API_KEY,APP_WEBHOOK_SECRET&envDescription=Set%20up%20environment%20variables%20for%20Astria%20AI%20and%20redirect%20URL%20in%20Supabase%20Auth%20dashboard.%20See%20.env.local.example%20for%20full%20config%20with%20Resend%20and%20Stripe.&envLink=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Fblob%2Fmain%2F.env.local.example&project-name=headshots-starter-clone&repository-name=headshots-starter-clone&demo-title=AI%20Headshot%20Generator&demo-description=A%20Professional%20AI%20headshot%20generator%20starter%20kit%20powered%20by%20Next.js%2C%20Leap%20AI%2C%20and%20Vercel&demo-url=https%3A%2F%2Fwww.getheadshots.ai%2F&demo-image=https%3A%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F1CEDfTwO5vPEiNMgN2Y1t6%2F245d1e0c11c4d8e734fbe345b9ecdc7c%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6&external-id=https%3A%2F%2Fgithub.com%2Fleap-ai%2Fheadshots-starter%2Ftree%2Fmain)
-
-
-## How To Get Good Results
-
-[![Good results Demo](/public/good_results.png)](https://blog.tryleap.ai/create-an-ai-headshot-generator-fine-tune-stable-diffusion-with-leap-api/#step-1-gather-your-image-samples-%F0%9F%93%B8)
-
-The image samples used to teach the model what your face looks like are critical. Garbage in = garbage out.
-
-- Enforce close-ups of faces and consider cropping so that the face is centered.
-- Enforce images with only one person in the frame.
-- Avoid accessories in samples like sunglasses and hats.
-- Ensure the face is clearly visible. (For face detection, consider using tools like [Cloudinary API](https://cloudinary.com/documentation/face_detection_based_transformations?ref=blog.tryleap.ai)).
-
-[![Avoid multiple faces](/public/multiple_faces.png)](https://blog.tryleap.ai/create-an-ai-headshot-generator-fine-tune-stable-diffusion-with-leap-api/#how-to-avoid-multiple-faces-in-results-%E2%9D%8C)
-
-If you get distorted results with multiple faces, repeated subjects, multiple limbs, etc, make sure to follow these steps and minimize the chance of this happening:
-
-- Make sure any samples uploaded are the same 1:1 height / width aspect ratio, for example 512x512, 1024x1024, etc.
-- Avoid multiple people in the samples uploaded.
-- Add "double torso, totem pole" to the negative prompt when generating.
-- Make sure your dimensions when generating are also 1:1 with the same height / width ratios of the samples.
-
-For more information on how to improve quality, read the blog [here](https://blog.tryleap.ai/create-an-ai-headshot-generator-fine-tune-stable-diffusion-with-leap-api/#step-1-gather-your-image-samples-%F0%9F%93%B8).
-
-### All Thanks To Our Contributors:
-
-<a href="https://github.com/leap-ai/headshots-starter/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=leap-ai/headshots-starter" />
-</a>
-
-## Additional Use-Cases
-
-Headshot AI can be easily adapted to support many other use-cases of [Astria](https://www.astria.ai/) including:
-
-- AI Avatars
-  - [Anime](https://blog.tryleap.ai/transforming-images-into-anime-with-leap-ai/)
-  - [Portraits](https://blog.tryleap.ai/ai-time-machine-images-a-glimpse-into-the-future-with-leap-ai/)
-  - [Story Illustrations](https://blog.tryleap.ai/novel-ai-image-generator-using-leap-ai-a-comprehensive-guide/)
-
-[![Anime AI Demo](/public/anime.png)](https://www.astria.ai/gallery/packs)
-
-- Pet Portraits
-
-[![Pet AI Demo](/public/pet.png)](https://www.astria.ai/gallery/packs)
-
-- Product Shots
-- Food Photography
-
-[![Product AI Demo](/public/products.png)](https://www.astria.ai/)
-
-- Icons
-- [Style-Consistent Assets](https://blog.tryleap.ai/how-to-generate-style-consistent-assets-finetuning-on-leap/)
-
-[![Icons AI Demo](/public/icons.png)](https://www.astria.ai/)
-
-& more!
-
-## Contributing
-
-We welcome collaboration and appreciate your contribution to Headshot AI. If you have suggestions for improvement or significant changes in mind, feel free to open an issue!
-
-If you want to contribute to the codebase make sure you create a new branch and open a pull request that points to `dev`.
-
-## Resources and Support
-
-- Help Email: support@astria.ai
-
-## License
-
-Headshot AI is released under the [MIT License](https://choosealicense.com/licenses/mit/).
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯陪伴 - AI智能习惯养成助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-seedling text-white text-lg"></i>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">习惯陪伴</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors">功能特色</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 transition-colors">工作原理</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 transition-colors">价格方案</a>
+                    <a href="#demo" class="text-gray-700 hover:text-blue-600 transition-colors">在线演示</a>
+                </div>
+                <div class="flex space-x-4">
+                    <button class="px-4 py-2 text-blue-600 hover:text-blue-800 transition-colors">登录</button>
+                    <button class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:opacity-90 transition-opacity">开始使用</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 公告栏 -->
+    <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white text-center py-2 mt-20">
+        <p class="text-sm">🎉 全新AI智能推荐功能已上线！立即体验个性化习惯养成计划</p>
+    </div>
+
+    <!-- 英雄区域 -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        AI智能<br>
+                        <span class="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">习惯养成</span><br>
+                        陪伴助手
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100">
+                        利用AI技术为您量身定制个性化习惯养成计划，智能陪伴您的每一步成长，让好习惯自然而然地融入生活。
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
+                            <i class="fas fa-rocket mr-2"></i>
+                            立即开始免费体验
+                        </button>
+                        <button class="px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            观看演示视频
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-6 text-blue-100">
+                        <div class="flex items-center">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>10,000+ 用户信赖</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star mr-2"></i>
+                            <span>4.9/5 用户评分</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="floating">
+                        <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
+                            <div class="text-center mb-6">
+                                <div class="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-brain text-white text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">AI智能分析</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-white/20 rounded-lg p-3">
+                                    <span>早起习惯</span>
+                                    <div class="w-16 h-2 bg-green-400 rounded-full"></div>
+                                </div>
+                                <div class="flex items-center justify-between bg-white/20 rounded-lg p-3">
+                                    <span>运动锻炼</span>
+                                    <div class="w-12 h-2 bg-blue-400 rounded-full"></div>
+                                </div>
+                                <div class="flex items-center justify-between bg-white/20 rounded-lg p-3">
+                                    <span>阅读学习</span>
+                                    <div class="w-20 h-2 bg-purple-400 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">强大功能，助力成长</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    集成先进AI技术，为您提供全方位的习惯养成解决方案
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">AI个性化推荐</h3>
+                    <p class="text-gray-600 mb-4">基于您的生活方式、目标和偏好，AI为您量身定制最适合的习惯养成计划。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 智能分析个人特征</li>
+                        <li>• 动态调整计划难度</li>
+                        <li>• 个性化提醒时间</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">智能进度跟踪</h3>
+                    <p class="text-gray-600 mb-4">实时监测习惯执行情况，提供详细的数据分析和可视化图表。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 多维度数据统计</li>
+                        <li>• 趋势分析报告</li>
+                        <li>• 成就里程碑</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">AI陪伴聊天</h3>
+                    <p class="text-gray-600 mb-4">24/7 AI助手陪伴，提供鼓励、建议和情感支持，让您不再孤单。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 情感智能对话</li>
+                        <li>• 及时鼓励反馈</li>
+                        <li>• 困难时期支持</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bell text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">智能提醒系统</h3>
+                    <p class="text-gray-600 mb-4">基于您的作息和习惯模式，智能安排最佳提醒时间。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 自适应提醒时间</li>
+                        <li>• 多种提醒方式</li>
+                        <li>• 渐进式提醒强度</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">社区互动</h3>
+                    <p class="text-gray-600 mb-4">加入志同道合的习惯养成社区，分享经验，相互激励。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 习惯打卡分享</li>
+                        <li>• 经验交流论坛</li>
+                        <li>• 互助监督小组</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-trophy text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">成就奖励系统</h3>
+                    <p class="text-gray-600 mb-4">完成习惯目标获得奖励，解锁新成就，保持持续动力。</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• 多层级成就系统</li>
+                        <li>• 虚拟奖励机制</li>
+                        <li>• 个性化徽章收集</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作原理 -->
+    <section id="how-it-works" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">工作原理</h2>
+                <p class="text-xl text-gray-600">只需四步，开启您的习惯养成之旅</p>
+            </div>
+
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-blue-600">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">个人信息填写</h3>
+                    <p class="text-gray-600">告诉我们您的生活方式、目标和偏好，让AI更好地了解您。</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-green-600">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">AI智能分析</h3>
+                    <p class="text-gray-600">AI分析您的数据，生成最适合您的个性化习惯养成计划。</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-purple-600">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">开始执行</h3>
+                    <p class="text-gray-600">按照AI制定的计划开始养成习惯，记录每日进展。</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-orange-600">4</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">持续优化</h3>
+                    <p class="text-gray-600">AI持续学习您的反馈，不断优化计划，确保长期成功。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术栈展示 -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">技术驱动</h2>
+                <p class="text-xl text-gray-600">采用最先进的技术栈，确保稳定可靠的用户体验</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-js-square text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Next.js</h3>
+                    <p class="text-sm text-gray-600">现代化React框架，快速响应</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">OpenAI GPT-4</h3>
+                    <p class="text-sm text-gray-600">先进AI模型，智能分析</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-database text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Supabase</h3>
+                    <p class="text-sm text-gray-600">安全数据库与认证</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-stripe text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Stripe</h3>
+                    <p class="text-sm text-gray-600">安全支付处理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户案例 -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">用户成功案例</h2>
+                <p class="text-xl text-gray-600">看看其他用户如何通过习惯陪伴改变生活</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">李</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">李小明</h4>
+                            <p class="text-sm text-gray-600">产品经理</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"通过习惯陪伴，我成功养成了早起和运动的习惯。AI助手的鼓励让我在困难时期坚持了下来。"</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-600">坚持62天</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">王</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">王小红</h4>
+                            <p class="text-sm text-gray-600">设计师</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"阅读习惯的养成让我收获很多。个性化的计划非常贴合我的生活节奏，真的很棒！"</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-600">坚持89天</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">张</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">张大伟</h4>
+                            <p class="text-sm text-gray-600">程序员</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"作为程序员，我的作息很不规律。习惯陪伴帮我建立了健康的生活节奏，工作效率提升了很多。"</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-600">坚持124天</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 价格方案 -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">选择适合您的方案</h2>
+                <p class="text-xl text-gray-600">从免费体验到专业版，总有一款适合您</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-semibold mb-2">免费版</h3>
+                        <div class="text-4xl font-bold mb-2">¥0</div>
+                        <p class="text-gray-600">永久免费</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>基础习惯跟踪</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>简单进度统计</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>3个习惯同时跟踪</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-gray-400 mr-3"></i>
+                            <span>AI个性化推荐</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-gray-400 mr-3"></i>
+                            <span>AI陪伴聊天</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors">
+                        开始免费使用
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg border-2 border-blue-500 relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">推荐</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-semibold mb-2">专业版</h3>
+                        <div class="text-4xl font-bold mb-2">¥29</div>
+                        <p class="text-gray-600">每月</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>无限习惯跟踪</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>AI个性化推荐</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>AI陪伴聊天</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>高级数据分析</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>优先客服支持</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        立即升级
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-semibold mb-2">团队版</h3>
+                        <div class="text-4xl font-bold mb-2">¥199</div>
+                        <p class="text-gray-600">每月 (5人)</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>专业版全部功能</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>团队协作功能</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>管理员仪表板</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>定制化培训</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>24/7技术支持</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors">
+                        联系销售
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 在线演示 -->
+    <section id="demo" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">在线演示</h2>
+                <p class="text-xl text-gray-600">立即体验习惯陪伴的强大功能</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-900 rounded-xl p-8 text-white">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold">一键部署到Vercel</h3>
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 mb-6">
+                        <code class="text-green-400">
+                            git clone https://github.com/habit-ai/habit-companion-starter<br>
+                            cd habit-companion-starter<br>
+                            npm install<br>
+                            npm run dev
+                        </code>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="flex-1 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center">
+                            <i class="fab fa-github mr-2"></i>
+                            查看源码
+                        </button>
+                        <button class="flex-1 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Deploy with Vercel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发者资源 -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">开发者资源</h2>
+                <p class="text-xl text-gray-600">完整的开发文档和社区支持</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <i class="fas fa-book text-blue-500 text-3xl mb-4"></i>
+                    <h3 class="font-semibold mb-2">API文档</h3>
+                    <p class="text-sm text-gray-600 mb-4">完整的API接口文档</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">查看文档 →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <i class="fab fa-github text-gray-700 text-3xl mb-4"></i>
+                    <h3 class="font-semibold mb-2">GitHub</h3>
+                    <p class="text-sm text-gray-600 mb-4">开源代码仓库</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">Star项目 →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <i class="fas fa-comments text-green-500 text-3xl mb-4"></i>
+                    <h3 class="font-semibold mb-2">社区论坛</h3>
+                    <p class="text-sm text-gray-600 mb-4">开发者交流社区</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">加入讨论 →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <i class="fas fa-life-ring text-orange-500 text-3xl mb-4"></i>
+                    <h3 class="font-semibold mb-2">技术支持</h3>
+                    <p class="text-sm text-gray-600 mb-4">专业技术支持服务</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">获取帮助 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-seedling text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold">习惯陪伴</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">AI驱动的个性化习惯养成助手，陪伴您的每一步成长。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">产品</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">功能特色</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">价格方案</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">在线演示</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">用户案例</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">开发者</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">API文档</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">社区</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">贡献指南</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">支持</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">隐私政策</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 习惯陪伴. MIT许可证下发布. 用❤️构建</p>
+                <p class="mt-2">邮箱支持: support@habitcompanion.ai</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white');
+                nav.classList.remove('bg-white/90');
+            } else {
+                nav.classList.add('bg-white/90');
+                nav.classList.remove('bg-white');
+            }
+        });
+
+        // 简单的动画观察器
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有卡片元素
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
